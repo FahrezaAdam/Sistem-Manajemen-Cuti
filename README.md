@@ -6,7 +6,7 @@
 
 ---
 
-## 📌 Ringkasan Eksekutif (Untuk Tim HR & Recruiter)
+## Ringkasan Eksekutif (Untuk Tim HR & Recruiter)
 Repository ini merupakan hasil pengerjaan *Technical Test* untuk seleksi Magang Backend Developer. Proyek ini adalah sebuah RESTful API untuk Sistem Manajemen Cuti Karyawan yang telah dikerjakan dengan memenuhi **seluruh (100%)** kriteria wajib dari soal tes:
 - Framework menggunakan **Laravel 11**.
 - Implementasi Otentikasi Ganda: Login konvensional & **Google OAuth 2.0**.
