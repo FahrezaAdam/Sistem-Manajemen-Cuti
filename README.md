@@ -1,16 +1,36 @@
 # API Sistem Manajemen Cuti
 
-Source code untuk Backend Developer Technical Test (Sistem Manajemen Cuti).
+**Technical Test Submission**
+- **Nama Pelamar**: Fahreza Adam Nuardiansyah
+- **Posisi**: Backend Developer 
 
-## Prasyarat Instalasi
+---
+
+## 📌 Ringkasan Eksekutif (Untuk Tim HR & Recruiter)
+Repository ini merupakan hasil pengerjaan *Technical Test* untuk seleksi Magang Backend Developer. Proyek ini adalah sebuah RESTful API untuk Sistem Manajemen Cuti Karyawan yang telah dikerjakan dengan memenuhi **seluruh (100%)** kriteria wajib dari soal tes:
+- Framework menggunakan **Laravel 11**.
+- Implementasi Otentikasi Ganda: Login konvensional & **Google OAuth 2.0**.
+- Manajemen *Role* yang ketat (Admin & Employee).
+- Logika pemotongan otomatis batas limit cuti (12 hari per tahun).
+- Unggah file bukti lampiran cuti.
+
+Untuk pengujian *endpoint* API, Anda dapat menggunakan dua fasilitas dokumentasi berikut:
+1. **[Postman Collection (Publik)](https://documenter.getpostman.com/view/53167638/2sBY4LSNVm)**: Dapat diakses langsung tanpa perlu instalasi lokal.
+2. **Swagger UI**: Dokumentasi API interaktif bawaan (Dapat diakses di `http://localhost:8000/api/documentation` setelah server lokal dijalankan).
+
+---
+
+## 💻 Panduan Instalasi (Untuk Tim Engineer / Reviewer)
+
+### Prasyarat Instalasi
 - PHP 8.2 atau lebih tinggi
 - Composer
 - MySQL atau PostgreSQL
 
-## Panduan Instalasi
+### Langkah Instalasi
 1. Clone repository:
 ```bash
-git clone <repo-url>
+git clone https://github.com/FahrezaAdam/Sistem-Manajemen-Cuti.git
 cd FahrezaAdamNuardiansyah-BackendTechnicalTest
 composer install
 ```
@@ -34,10 +54,6 @@ php artisan storage:link
 php artisan serve
 ```
 
-## Dokumentasi API (Testing)
-- **Swagger UI**: Buka `http://localhost:8000/api/documentation` di browser.
-- **Postman Collection**: [Lihat Collection Publik di Postman](https://documenter.getpostman.com/view/53167638/2sBY4LSNVm)
-
 ---
 
 ## Alur Sistem & Arsitektur (Technical Overview)
@@ -47,7 +63,7 @@ Untuk memenuhi standar pengembangan perangkat lunak yang *scalable* dan *maintai
 ### 1. Request Lifecycle (Alur Eksekusi Permintaan)
 Setiap *request* HTTP yang masuk (khususnya untuk *endpoint* krusial seperti pengajuan cuti) harus melewati lapisan inspeksi yang ketat sebelum menyentuh *Controller*:
 `Route -> Auth Middleware (Sanctum) -> Role Middleware (IsAdmin) -> FormRequest Validation -> Controller -> Eloquent ORM -> Database Response`
- 
+
 ### 2. Separation of Concerns (Pemisahan Logika)
 - **Fat Request, Skinny Controller**: Seluruh logika validasi data (tipe file, logika kalender *start/end date*) dan otorisasi *user* diekstraksi keluar dari Controller, ditempatkan ke dalam kelas *Dependency Injection* `FormRequest` khusus (contoh: `StoreLeaveRequest.php`). Hal ini menjaga Controller tetap bersih (*clean*) dan murni hanya berfokus pada eksekusi bisnis logika serta memformat JSON *response*.
 
