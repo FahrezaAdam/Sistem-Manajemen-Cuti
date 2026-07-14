@@ -76,8 +76,6 @@ class LeaveController extends Controller
             'status' => 'pending', // default
         ]);
 
-        $user->decrement('leave_quota', $daysRequested);
-
         return response()->json([
             'message' => 'Leave request submitted successfully.',
             'leave' => $leave,

@@ -52,18 +52,21 @@ class LeaveController extends Controller
             'status' => ['required', Rule::in(['approved', 'rejected'])],
         ]);
 
-        $leaf->update([
-            'status' => $request->status
-        ]);
-
-        if ($request->status === 'rejected') {
+        if ($request->status === 'approved' && $leaf->status !== 'approved') {
             $user = $leaf->user;
             $start = \Carbon\Carbon::parse($leaf->start_date);
             $end = \Carbon\Carbon::parse($leaf->end_date);
             $days = $start->diffInDays($end) + 1;
 
-            $user->increment('leave_quota', $days);
+            if ($user->leave_quota < $days) {
+                return response()->json(['message' => 'Karyawan ini tidak memiliki sisa kuota yang cukup untuk menyetujui cuti ini'], 400);
+            }
+            $user->decrement('leave_quota', $days);
         }
+
+        $leaf->update([
+            'status' => $request->status
+        ]);
 
         return response()->json([
             'message' => 'Leave status updated successfully',

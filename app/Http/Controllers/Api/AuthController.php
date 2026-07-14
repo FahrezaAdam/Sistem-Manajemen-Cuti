@@ -46,13 +46,10 @@ class AuthController extends Controller
             'role' => 'employee',
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
+            'message' => 'User registered successfully.',
             'user' => $user
-        ]);
+        ], 201);
     }
 
     #[OA\Post(
