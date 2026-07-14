@@ -1,9 +1,5 @@
 # API Sistem Manajemen Cuti
 
-**Technical Test Submission**
-- **Nama Pelamar**: Fahreza Adam Nuardiansyah
-- **Posisi**: Backend Developer 
-
 ---
 
 ## Deskripsi Proyek
