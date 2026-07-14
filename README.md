@@ -6,8 +6,8 @@
 
 ---
 
-## Ringkasan Eksekutif (Untuk Tim HR & Recruiter)
-Repository ini merupakan hasil pengerjaan *Technical Test* untuk seleksi Magang Backend Developer. Proyek ini adalah sebuah RESTful API untuk Sistem Manajemen Cuti Karyawan yang telah dikerjakan dengan memenuhi **seluruh (100%)** kriteria wajib dari soal tes:
+## Deskripsi Proyek
+Proyek ini adalah sebuah RESTful API untuk Sistem Manajemen Cuti Karyawan yang dirancang dengan skalabilitas dan arsitektur yang bersih (*Clean Architecture*). Sistem ini dilengkapi dengan fitur-fitur utama berikut:
 - Framework menggunakan **Laravel 11**.
 - Implementasi Otentikasi Ganda: Login konvensional & **Google OAuth 2.0**.
 - Manajemen *Role* yang ketat (Admin & Employee).
@@ -22,7 +22,7 @@ Untuk pengujian *endpoint* API, Anda dapat menggunakan dua fasilitas dokumentasi
 
 ---
 
-## Panduan Instalasi (Untuk Tim Engineer / Reviewer)
+## Panduan Instalasi
 
 ### Prasyarat Instalasi
 - PHP 8.2 atau lebih tinggi
