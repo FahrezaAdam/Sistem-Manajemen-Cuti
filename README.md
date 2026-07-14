@@ -18,9 +18,11 @@ Untuk pengujian *endpoint* API, Anda dapat menggunakan dua fasilitas dokumentasi
 1. **[Postman Collection (Publik)](https://documenter.getpostman.com/view/53167638/2sBY4LSNVm)**: Dapat diakses langsung tanpa perlu instalasi lokal.
 2. **Swagger UI**: Dokumentasi API interaktif bawaan (Dapat diakses di `http://localhost:8000/api/documentation` setelah server lokal dijalankan).
 
+**Video Demo Sistem**: [Tonton Video Demonstrasi di Sini](https://youtu.be/PinrqS507nk)
+
 ---
 
-## 💻 Panduan Instalasi (Untuk Tim Engineer / Reviewer)
+## Panduan Instalasi (Untuk Tim Engineer / Reviewer)
 
 ### Prasyarat Instalasi
 - PHP 8.2 atau lebih tinggi
@@ -76,8 +78,8 @@ Setiap *request* HTTP yang masuk (khususnya untuk *endpoint* krusial seperti pen
 Alur pemotongan dan pengembalian (*refund*) kuota dirancang agar sangat kedap terhadap kesalahan matematis:
 1. Ketika pengajuan lolos validasi, sistem memanfaatkan *Carbon* untuk menghitung durasi rentang tanggal yang di- *request*.
 2. Sistem mengecek *state* `leave_quota` dari model. Jika jumlah durasi melebihi sisa kuota, sistem membatalkan proses dengan error 400 *Bad Request*.
-3. Jika kuota mencukupi, kuota akan **langsung dipotong (decrement)** di awal proses pengajuan. Pendekatan ini adalah krusial untuk mencegah *race-condition* seandainya *user* mengirim puluhan *request* secara bersamaan.
-4. Jika *Admin* mengeksekusi aksi Penolakan (*Reject*) terhadap pengajuan tersebut, sistem akan menghitung ulang selisih hari dan melakukan kompensasi (*refund*) dengan mengembalikan jumlah hari cuti tersebut ke *state* karyawan.
+3. Pada saat pengajuan dibuat, status akan diset menjadi *Pending*. Pada tahap ini **kuota cuti belum dipotong**.
+4. Ketika *Admin* melakukan eksekusi persetujuan (*Approve*), barulah sistem memeriksa apakah kuota karyawan masih mencukupi. Jika mencukupi, sistem akan secara resmi **memotong (decrement)** kuota cuti tersebut. Jika *Admin* menolak (*Reject*), kuota karyawan akan tetap utuh tanpa terpotong.
 
 ### 5. Strategi Otentikasi Terpusat
 - Sistem API ini menggunakan **Laravel Sanctum** untuk menerbitkan token (*Personal Access Tokens*) bagi mekanisme login lokal.
